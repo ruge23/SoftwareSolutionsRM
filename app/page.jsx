@@ -26,7 +26,9 @@ const Home = () => {
               Software Solution <span className="text-green-500">RM</span>
             </h1>
             <p className="mb-6 text-white/80">
-              Desarrollo de software y sistemas a medida. Automatización de negocios para mejorar la eficiencia y el crecimiento de tu empresa.
+              <span className="text-accent">✓</span> Digitalizamos tu empresa con soluciones inteligentes y a medida
+            <p></p>
+              <span className="text-accent">✓</span> Impulsamos tu crecimiento con software hecho para vos
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-6">
               {/* Botón de WhatsApp mejorado */}
@@ -42,7 +44,7 @@ const Home = () => {
                   className="w-full uppercase flex items-center gap-3 border-green-500 text-green-500 hover:bg-green-500 hover:text-black transition-all duration-300"
                 >
                   <FaWhatsapp className="text-xl" />
-                  <span>Contactar por WhatsApp</span>
+                  <span>WhatsApp</span>
                 </Button>
               </a>
               

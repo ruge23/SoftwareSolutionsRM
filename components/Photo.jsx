@@ -23,14 +23,14 @@ const Photo = () => {
           className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten absolute"
         >
         <Image
-  src="/assets/SolutionSoftwareRM.png"
-  priority
-  quality={100}
-  fill
-  alt="Software Solution RM"
-  className="object-contain"
-  style={{ opacity: 0.5 }} // Valor numérico entre 0 y 1
-/>
+    src="/assets/LogoSS.jpg"
+    priority
+    quality={100}
+    fill
+    alt="Software Solution RM"
+    className="object-contain scale-60" // Tailwind: reduce al 50%
+    // style={{ transform: 'scale(0.5)' }} // Opción con CSS puro
+  />
         </motion.div>
         {/* circle */}
         <motion.svg
