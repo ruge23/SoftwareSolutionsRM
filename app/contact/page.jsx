@@ -19,17 +19,17 @@ const info = [
   {
     icon: <FaPhoneAlt />,
     title: "Phone",
-    description: "(+1) 786 968 2945"
+    description: "(+54) 3813158053"
   },
   {
     icon: <FaEnvelope />,
     title: "Email",
-    description: "ruizgerezr@gmail.com"
+    description: "maxida20@gmail.com"
   },
   {
     icon: <FaMapMarkedAlt />,
     title: "Address",
-    description: "8011 Abbott Ave, FL 33141"
+    description: "Av. Roca 3300, Tucumán"
   }
 ];
 const Contact = () => {
@@ -49,7 +49,7 @@ const Contact = () => {
               <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
                 <h3 className="text-4xl text-accent">Let's work together</h3>
                 <p className="text-white/60">
-                  Lorem, impusn
+                  Hola, escribenos
                 </p>
                 {/* input */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

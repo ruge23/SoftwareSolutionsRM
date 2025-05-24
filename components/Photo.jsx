@@ -22,14 +22,15 @@ const Photo = () => {
           }}
           className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten absolute"
         >
-          <Image
-            src="/assets/photo.jpg"
-            priority
-            quality={100}
-            fill
-            alt=""
-            className="object-contain"
-          />
+        <Image
+  src="/assets/SolutionSoftwareRM.png"
+  priority
+  quality={100}
+  fill
+  alt="Software Solution RM"
+  className="object-contain"
+  style={{ opacity: 0.5 }} // Valor numérico entre 0 y 1
+/>
         </motion.div>
         {/* circle */}
         <motion.svg
