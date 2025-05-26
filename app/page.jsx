@@ -26,10 +26,14 @@ const Home = () => {
               Software Solution <span className="text-green-500">RM</span>
             </h1>
             <p className="mb-6 text-white/80">
-              <span className="text-accent">✓</span> Digitalizamos tu empresa con soluciones inteligentes y a medida
-            <p></p>
-              <span className="text-accent">✓</span> Impulsamos tu crecimiento con software hecho para vos
+              <span className="text-accent">✓</span> Digitalizamos tu empresa con soluciones inteligentes y a medida.  <br />         
+              <span className="text-accent">✓</span> Impulsamos tu crecimiento con software hecho para vos. <br /> 
+              <span className="text-accent">✓</span> Business Intelligence.
             </p>
+                      
+            
+            
+            
             <div className="flex flex-col sm:flex-row items-center gap-6">
               {/* Botón de WhatsApp mejorado */}
               <a 

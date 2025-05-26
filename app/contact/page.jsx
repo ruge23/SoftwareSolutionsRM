@@ -25,7 +25,7 @@ const info = [
   {
     icon: <FaEnvelope />,
     title: "Email",
-    description: "maxida20@gmail.com"
+    description: "softwaresolutionrm@gmail.com"
   },
   {
     icon: <FaMapMarkedAlt />,
@@ -162,6 +162,7 @@ const Contact = () => {
                       <SelectLabel>Servicios</SelectLabel>
                       <SelectItem value="web">Desarrollo Web</SelectItem>
                       <SelectItem value="mobile">Desarrollo de Apps Móviles</SelectItem>
+                      <SelectItem value="analyst">Business Intelligence</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
