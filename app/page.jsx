@@ -1,13 +1,18 @@
+'use client';
+
+import { useState } from "react";
 import Photo from "@/components/Photo";
 import Social from "@/components/Social";
 import Stats from "@/components/Stats";
+import ModalWhatsApp from "@/components/ModalWhatsApp";
 import { Button } from "@/components/ui/button";
 import { FaWhatsapp } from "react-icons/fa"; // Cambiado a ícono de WhatsApp
 
 const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   // Datos reutilizables (mejor mantenimiento)
   const whatsappData = {
-    phone: "543813158053", // Número con código de país
+    phone: ["+54 3813158053", "+1 7869682945"], // Número con código de país
     message: "Hola, estoy interesado en sus soluciones de software"
   };
 
@@ -35,22 +40,16 @@ const Home = () => {
             
             
             <div className="flex flex-col sm:flex-row items-center gap-6">
-              {/* Botón de WhatsApp mejorado */}
-              <a 
-                href={whatsappUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto"
+             {/* Botón de WhatsApp que abre el modal */}
+              <Button
+                onClick={() => setIsModalOpen(true)}
+                variant="outline"
+                size="lg"
+                className="w-full sm:w-auto uppercase flex items-center gap-3 border-green-500 text-green-500 hover:bg-green-500 hover:text-black transition-all duration-300"
               >
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="w-full uppercase flex items-center gap-3 border-green-500 text-green-500 hover:bg-green-500 hover:text-black transition-all duration-300"
-                >
-                  <FaWhatsapp className="text-xl" />
-                  <span>WhatsApp</span>
-                </Button>
-              </a>
+                <FaWhatsapp className="text-xl" />
+                <span>WhatsApp</span>
+              </Button>
               
               <div className="mt-4 sm:mt-0">
                 <Social
@@ -67,6 +66,12 @@ const Home = () => {
         </div>
         <Stats />
       </div>
+      {/* Modal de WhatsApp */}
+      <ModalWhatsApp 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        whatsappData={whatsappData}
+      />
     </section>
   );
 };
