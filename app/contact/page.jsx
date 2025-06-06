@@ -9,257 +9,250 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue 
 } from "@/components/ui/select";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt, FaFlagUsa, FaFlag } from "react-icons/fa";
+import { 
+  FaPhoneAlt, 
+  FaEnvelope, 
+  FaMapMarkerAlt,
+  FaChevronRight
+} from "react-icons/fa";
+import { FiGlobe, FiSend } from "react-icons/fi";
 import { motion } from "framer-motion";
 
-const info = [
+const locations = [
   {
     country: "Argentina",
-    icon: <FaFlag className="text-blue-500" />,
+    flag: "🇦🇷",
     items: [
       {
-        icon: <FaPhoneAlt />,
-        title: "Teléfono AR",
-        description: "+54 3813158053"
+        icon: <FaPhoneAlt className="text-green-500" />,
+        title: "Teléfono",
+        value: "+54 381 315-8053"
       },
       {
-        icon: <FaMapMarkedAlt />,
-        title: "Dirección AR",
-        description: "Av. Roca 3300, Tucumán"
+        icon: <FaMapMarkerAlt className="text-green-500" />,
+        title: "Oficina Principal",
+        value: "Av. Roca 3300, Tucumán"
       }
     ]
   },
   {
-    country: "Estados Unidos",
-    icon: <FaFlagUsa className="text-red-500" />,
+    country: "United States",
+    flag: "🇺🇸",
     items: [
       {
-        icon: <FaPhoneAlt />,
-        title: "Teléfono US",
-        description: "+1 7869682945"
+        icon: <FaPhoneAlt className="text-green-500" />,
+        title: "Phone",
+        value: "+1 (786) 968-2945"
       },
       {
-        icon: <FaMapMarkedAlt />,
-        title: "Dirección US",
-        description: "3000 NE 2nd Ave, Miami, FL"
+        icon: <FaMapMarkerAlt className="text-green-500" />,
+        title: "HQ Office",
+        value: "3000 NE 2nd Ave, Miami, FL"
       }
     ]
-  },
-  {
-    icon: <FaEnvelope />,
-    title: "Email",
-    description: "softwaresolutionrm@gmail.com",
-    global: true
   }
 ];
 
-const Contact = () => {
-  const [errors, setErrors] = useState({});
+const ContactPage = () => {
   const [formData, setFormData] = useState({
-    firstname: '',
-    lastname: '',
+    name: '',
     email: '',
-    phone: '',
-    service: '',
+    company: '',
+    interest: '',
     message: ''
   });
 
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    // Limpiar error cuando el usuario escribe
-    if (errors[name]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: null
-      }));
-    }
-  };
-
-  const handleSelectChange = (value) => {
-    setFormData(prev => ({
-      ...prev,
-      service: value
-    }));
-    if (errors.service) {
-      setErrors(prev => ({
-        ...prev,
-        service: null
-      }));
-    }
-  };
-
-  const validate = () => {
-    const newErrors = {};
-    
-    if (!formData.firstname.trim()) newErrors.firstname = 'Nombre es requerido';
-    if (!formData.lastname.trim()) newErrors.lastname = 'Apellido es requerido';
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email es requerido';
-    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
-      newErrors.email = 'Ingrese un email válido';
-    }
-    if (!formData.phone.trim()) newErrors.phone = 'Teléfono es requerido';
-    if (!formData.service) newErrors.service = 'Seleccione un servicio';
-    if (!formData.message.trim()) newErrors.message = 'Mensaje es requerido';
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (errors[name]) setErrors(prev => ({ ...prev, [name]: null }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = validate();
+    const newErrors = {};
     
-    if (isValid) {
-      // Aquí iría la lógica de envío del formulario
-      console.log('Formulario válido:', formData);
-      // Mostrar mensaje de éxito
-      alert('Formulario enviado correctamente');
+    if (!formData.name.trim()) newErrors.name = 'Required field';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Required field';
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = 'Invalid email format';
+    }
+    if (!formData.message.trim()) newErrors.message = 'Tell us about your project';
+    
+    setErrors(newErrors);
+    
+    if (Object.keys(newErrors).length === 0) {
+      setIsSubmitting(true);
+      // Simular envío
+      setTimeout(() => {
+        alert('Message sent successfully!');
+        setIsSubmitting(false);
+      }, 1500);
     }
   };
 
   return (
-    <motion.section
+    <motion.div
       initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn"}
-      }}
-      className="py-6"
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="bg-gray-950 text-white pt-32 pb-20"
     >
-      <div className="container mx-auto">
-        <div className="flex flex-col xl:flex-row gap-[30px]">
-          {/* Form */}
-          <div className="xl:h-[54%] order-2 xl:order-none">
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
-              noValidate
-            >
-              <h3 className="text-4xl text-accent">Trabajemos juntos</h3>
-              <p className="text-white/60">Hola, escríbenos</p>
-              
-              {/* Inputs - Añadida clase w-full para consistencia */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {[
-                  { name: 'firstname', placeholder: 'Nombre', type: 'text' },
-                  { name: 'lastname', placeholder: 'Apellido', type: 'text' },
-                  { name: 'email', placeholder: 'Email', type: 'email' },
-                  { name: 'phone', placeholder: 'Teléfono', type: 'tel' }
-                ].map((field) => (
-                  <div className="space-y-2 w-full" key={field.name}>
-                    <Input
-                      type={field.type}
-                      name={field.name}
-                      placeholder={field.placeholder}
-                      value={formData[field.name]}
-                      onChange={handleChange}
-                      className={`w-full ${errors[field.name] ? "border-red-500" : ""}`}
-                    />
-                    {errors[field.name] && (
-                      <p className="text-red-500 text-sm">{errors[field.name]}</p>
-                    )}
-                  </div>
-                ))}
+      <div className="container mx-auto px-6">
+        {/* Hero Section */}
+        <div className="max-w-4xl mx-auto text-center mb-20">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+            Let's <span className="text-green-500">Build</span> Together
+          </h1>
+          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            We partner with innovators worldwide to create mission-critical software solutions.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Contact Form */}
+          <div className="bg-gray-900/50 p-8 rounded-xl border border-gray-800">
+            <h2 className="text-2xl font-bold mb-2">Get in Touch</h2>
+            <p className="text-gray-400 mb-8">
+              Fill out the form and our team will contact you within 24 hours
+            </p>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div>
+                <Input
+                  name="name"
+                  placeholder="Full Name *"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`bg-gray-800 border-gray-700 ${errors.name && "border-red-500"}`}
+                />
+                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
               </div>
               
-              {/* Select - Añadidas clases para igualar tamaño */}
-              <div className="space-y-2 w-full">
+              <div>
+                <Input
+                  name="email"
+                  type="email"
+                  placeholder="Email *"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`bg-gray-800 border-gray-700 ${errors.email && "border-red-500"}`}
+                />
+                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+              </div>
+              
+              <div>
+                <Input
+                  name="company"
+                  placeholder="Company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  className="bg-gray-800 border-gray-700"
+                />
+              </div>
+              
+              <div>
                 <Select
-                  value={formData.service}
-                  onValueChange={handleSelectChange}
+                  name="interest"
+                  onValueChange={(value) => setFormData({ ...formData, interest: value })}
                 >
-                  <SelectTrigger className={`w-full ${errors.service ? "border-red-500" : ""}`}>
-                    <SelectValue placeholder="Seleccione un servicio" />
+                  <SelectTrigger className="bg-gray-800 border-gray-700">
+                    <SelectValue placeholder="I'm interested in..." />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="bg-gray-800 border-gray-700">
                     <SelectGroup>
-                      <SelectLabel>Servicios</SelectLabel>
-                      <SelectItem value="web">Desarrollo Web</SelectItem>
-                      <SelectItem value="mobile">Desarrollo de Apps Móviles</SelectItem>
-                      <SelectItem value="analyst">Business Intelligence</SelectItem>
+                      <SelectItem value="web">Custom Software Development</SelectItem>
+                      <SelectItem value="ai">AI Solutions</SelectItem>
+                      <SelectItem value="cloud">Cloud Migration</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {errors.service && (
-                  <p className="text-red-500 text-sm">{errors.service}</p>
-                )}
               </div>
               
-              {/* Textarea - Ajustado para coincidir con el ancho */}
-              <div className="space-y-2 w-full">
+              <div>
                 <Textarea
                   name="message"
-                  className={`w-full h-[200px] ${errors.message ? "border-red-500" : ""}`}
-                  placeholder="Escriba su mensaje aquí"
+                  placeholder="Tell us about your project *"
+                  rows={5}
                   value={formData.message}
                   onChange={handleChange}
+                  className={`bg-gray-800 border-gray-700 ${errors.message && "border-red-500"}`}
                 />
-                {errors.message && (
-                  <p className="text-red-500 text-sm">{errors.message}</p>
-                )}
+                {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
               
-              {/* Button */}
-              <Button type="submit" size="md" className="max-w-40">
-                Enviar mensaje
+              <Button
+                type="submit"
+                className="bg-green-500 hover:bg-green-600 text-black font-medium w-full py-6"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending..." : (
+                  <>
+                    <span>Send Message</span>
+                    <FiSend className="ml-2" />
+                  </>
+                )}
               </Button>
             </form>
           </div>
           
-          {/* Info */}
-          {/* Info - Actualizada */}
-          <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
-            <ul className="flex flex-col gap-10 w-full">
-              {info.map((item, index) => (
-                <div key={index}>
-                  {item.global ? (
-                    <li className="flex items-center gap-6 mb-10">
-                      <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
-                        <div className="text-[28px]">{item.icon}</div>
+          {/* Contact Info */}
+          <div>
+            <h2 className="text-2xl font-bold mb-2">Global Offices</h2>
+            <p className="text-gray-400 mb-8">
+              We operate across multiple timezones to serve you better
+            </p>
+            
+            <div className="space-y-10">
+              {locations.map((location, index) => (
+                <div key={index} className="bg-gray-900/30 p-6 rounded-lg border border-gray-800">
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="text-2xl">{location.flag}</span>
+                    <h3 className="text-xl font-medium">{location.country}</h3>
+                  </div>
+                  
+                  <div className="space-y-4 pl-2 border-l-2 border-green-500/30">
+                    {location.items.map((item, i) => (
+                      <div key={i} className="flex items-start gap-4">
+                        <div className="mt-1">{item.icon}</div>
+                        <div>
+                          <p className="text-gray-400 text-sm">{item.title}</p>
+                          <p className="text-lg">{item.value}</p>
+                        </div>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-white/60">{item.title}</p>
-                        <h3 className="text-xl">{item.description}</h3>
-                      </div>
-                    </li>
-                  ) : (
-                    <div className="mb-10">
-                      <div className="flex items-center gap-4 mb-4">
-                        <div className="text-2xl">{item.icon}</div>
-                        <h3 className="text-xl font-medium text-accent">{item.country}</h3>
-                      </div>
-                      <div className="space-y-6 pl-4 border-l-2 border-accent/30">
-                        {item.items.map((subItem, subIndex) => (
-                          <li key={subIndex} className="flex items-center gap-6">
-                            <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center">
-                              <div className="text-[28px]">{subItem.icon}</div>
-                            </div>
-                            <div className="flex-1">
-                              <p className="text-white/60">{subItem.title}</p>
-                              <h3 className="text-xl">{subItem.description}</h3>
-                            </div>
-                          </li>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                    ))}
+                  </div>
                 </div>
               ))}
-            </ul>
+              
+              <div className="bg-gray-900/30 p-6 rounded-lg border border-gray-800">
+                <div className="flex items-center gap-3 mb-4">
+                  <FiGlobe className="text-green-500 text-xl" />
+                  <h3 className="text-xl font-medium">Global Support</h3>
+                </div>
+                
+                <div className="flex items-center gap-4 pl-2">
+                  <FaEnvelope className="text-green-500 mt-1" />
+                  <div>
+                    <p className="text-gray-400 text-sm">Email</p>
+                    <p className="text-lg">contact@rmtech.com</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </motion.section>
+    </motion.div>
   );
 };
 
-export default Contact;
+export default ContactPage;
