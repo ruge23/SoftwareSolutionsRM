@@ -1,0 +1,126 @@
+{
+  "Header": {
+    "logo": "RM Tech",
+    "nav": {
+      "solutions": "Solutions",
+      "approach": "Approach",
+      "industries": "Industries",
+      "caseStudies": "Case Studies",
+      "language": "EN",
+      "contact": "Contact Us"
+    }
+  },
+  "Home": {
+    "hero": {
+      "titlePart1": "Software Factory",
+      "titlePart2": "Global Innovators",
+      "subtitle": "We build mission-critical software for startups and enterprises worldwide, combining cutting-edge technology with military-grade precision.",
+      "ctaPrimary": "Start Your Project",
+      "ctaSecondary": "Explore Case Studies"
+    },
+    "solutions": {
+      "title": "Our Solutions",
+      "items": [
+        {
+          "title": "Custom Software Development",
+          "desc": "Tailored applications built from scratch to your specifications.",
+          "features": ["Web Apps", "Mobile Apps", "Desktop Solutions"]
+        },
+        {
+          "title": "Digital Transformation",
+          "desc": "Modernize legacy systems with cloud-native architectures.",
+          "features": ["Cloud Migration", "API Integration", "Data Pipelines"]
+        },
+        {
+          "title": "AI & Automation",
+          "desc": "Intelligent systems that learn and adapt.",
+          "features": ["Machine Learning", "Computer Vision", "Process Automation"]
+        }
+      ]
+    },
+    "approach": {
+      "title": "Our Approach",
+      "subtitle": "How we deliver exceptional results for clients across 12 countries",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Discovery",
+          "desc": "Deep dive into your business objectives"
+        },
+        {
+          "number": "02",
+          "title": "Prototyping",
+          "desc": "Rapid concept validation"
+        },
+        {
+          "number": "03",
+          "title": "Development",
+          "desc": "Agile sprints with bi-weekly deliveries"
+        },
+        {
+          "number": "04",
+          "title": "Scale",
+          "desc": "Optimization for growth"
+        }
+      ]
+    }
+  },
+  "Contact": {
+    "hero": {
+      "title": "Let's Build Together",
+      "subtitle": "We partner with innovators worldwide to create mission-critical software solutions."
+    },
+    "form": {
+      "title": "Get in Touch",
+      "description": "Fill out the form and our team will contact you within 24 hours",
+      "fields": {
+        "name": "Full Name *",
+        "email": "Email *",
+        "company": "Company",
+        "interest": "I'm interested in...",
+        "message": "Tell us about your project *",
+        "submit": "Send Message"
+      },
+      "errors": {
+        "required": "Required field",
+        "email": "Invalid email format",
+        "message": "Tell us about your project"
+      },
+      "success": "Message sent successfully!"
+    },
+    "offices": {
+      "title": "Global Offices",
+      "description": "We operate across multiple timezones to serve you better",
+      "support": "Global Support",
+      "locations": [
+        {
+          "country": "Argentina",
+          "items": [
+            {
+              "title": "Phone",
+              "value": "+54 381 315-8053"
+            },
+            {
+              "title": "Main Office",
+              "value": "Av. Roca 3300, Tucumán"
+            }
+          ]
+        },
+        {
+          "country": "United States",
+          "items": [
+            {
+              "title": "Phone",
+              "value": "+1 (786) 968-2945"
+            },
+            {
+              "title": "HQ Office",
+              "value": "3000 NE 2nd Ave, Miami, FL"
+            }
+          ]
+        }
+      ],
+      "email": "contact@rmtech.com"
+    }
+  }
+}

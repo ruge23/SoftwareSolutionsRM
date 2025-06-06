@@ -1,0 +1,126 @@
+{
+  "Header": {
+    "logo": "RM Tech",
+    "nav": {
+      "solutions": "Soluciones",
+      "approach": "Enfoque",
+      "industries": "Industrias",
+      "caseStudies": "Casos de Estudio",
+      "language": "ES",
+      "contact": "Contáctenos"
+    }
+  },
+  "Home": {
+    "hero": {
+      "titlePart1": "Fábrica de Software",
+      "titlePart2": "Innovadores Globales",
+      "subtitle": "Desarrollamos software crítico para startups y empresas en todo el mundo, combinando tecnología de vanguardia con precisión militar.",
+      "ctaPrimary": "Iniciar Proyecto",
+      "ctaSecondary": "Ver Casos de Estudio"
+    },
+    "solutions": {
+      "title": "Nuestras Soluciones",
+      "items": [
+        {
+          "title": "Desarrollo de Software a Medida",
+          "desc": "Aplicaciones personalizadas construidas desde cero según tus especificaciones.",
+          "features": ["Aplicaciones Web", "Apps Móviles", "Soluciones de Escritorio"]
+        },
+        {
+          "title": "Transformación Digital",
+          "desc": "Modernización de sistemas heredados con arquitecturas nativas de la nube.",
+          "features": ["Migración a la Nube", "Integración de APIs", "Procesamiento de Datos"]
+        },
+        {
+          "title": "IA & Automatización",
+          "desc": "Sistemas inteligentes que aprenden y se adaptan.",
+          "features": ["Aprendizaje Automático", "Visión por Computadora", "Automatización de Procesos"]
+        }
+      ]
+    },
+    "approach": {
+      "title": "Nuestro Enfoque",
+      "subtitle": "Cómo entregamos resultados excepcionales a clientes en 12 países",
+      "steps": [
+        {
+          "number": "01",
+          "title": "Descubrimiento",
+          "desc": "Análisis profundo de tus objetivos comerciales"
+        },
+        {
+          "number": "02",
+          "title": "Prototipado",
+          "desc": "Validación rápida de conceptos"
+        },
+        {
+          "number": "03",
+          "title": "Desarrollo",
+          "desc": "Sprints ágiles con entregas quincenales"
+        },
+        {
+          "number": "04",
+          "title": "Escalado",
+          "desc": "Optimización para crecimiento"
+        }
+      ]
+    }
+  },
+  "Contact": {
+    "hero": {
+      "title": "Construyamos Juntos",
+      "subtitle": "Colaboramos con innovadores en todo el mundo para crear soluciones de software críticas."
+    },
+    "form": {
+      "title": "Contáctenos",
+      "description": "Complete el formulario y nuestro equipo se comunicará con usted dentro de 24 horas",
+      "fields": {
+        "name": "Nombre Completo *",
+        "email": "Correo Electrónico *",
+        "company": "Empresa",
+        "interest": "Estoy interesado en...",
+        "message": "Cuéntanos sobre tu proyecto *",
+        "submit": "Enviar Mensaje"
+      },
+      "errors": {
+        "required": "Campo obligatorio",
+        "email": "Formato de email inválido",
+        "message": "Cuéntanos sobre tu proyecto"
+      },
+      "success": "¡Mensaje enviado con éxito!"
+    },
+    "offices": {
+      "title": "Oficinas Globales",
+      "description": "Operamos en múltiples zonas horarias para servirte mejor",
+      "support": "Soporte Global",
+      "locations": [
+        {
+          "country": "Argentina",
+          "items": [
+            {
+              "title": "Teléfono",
+              "value": "+54 381 315-8053"
+            },
+            {
+              "title": "Oficina Principal",
+              "value": "Av. Roca 3300, Tucumán"
+            }
+          ]
+        },
+        {
+          "country": "Estados Unidos",
+          "items": [
+            {
+              "title": "Teléfono",
+              "value": "+1 (786) 968-2945"
+            },
+            {
+              "title": "Oficina Central",
+              "value": "3000 NE 2nd Ave, Miami, FL"
+            }
+          ]
+        }
+      ],
+      "email": "contacto@rmtech.com"
+    }
+  }
+}
