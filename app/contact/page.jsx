@@ -243,7 +243,7 @@ const ContactPage = () => {
                   <FaEnvelope className="text-green-500 mt-1" />
                   <div>
                     <p className="text-gray-400 text-sm">Email</p>
-                    <p className="text-lg">contact@rmtech.com</p>
+                    <p className="text-lg">softwaresolutionsrm@gmail.com</p>
                   </div>
                 </div>
               </div>

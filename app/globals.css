@@ -3,8 +3,15 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-padding-top: 80px;
+    scroll-behavior: smooth;
+  }
   body {
     @apply font-primary bg-primary text-white leading-loose;
+  }
+  header {
+    transition: background-color 0.5s ease, backdrop-filter 0.5s ease, border-color 0.5s ease;
   }
   .h1{
     @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
@@ -21,5 +28,22 @@
   
   .text-outline-hover {
     -webkit-text-stroke: 1px #00ff99;
+  }
+
+  .logo, nav button {
+    transition: color 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  video {
+    transform: scale(1.01); /* Elimina bordes negros en algunos navegadores */
+    transition: opacity 0.5s ease;
+  }
+
+  video.loading {
+    opacity: 0;
+  }
+
+  :target {
+    scroll-margin-top: 80px;
   }
 }
