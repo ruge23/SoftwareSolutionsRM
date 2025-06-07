@@ -1,12 +1,24 @@
 'use client';
 import { useState, useMemo, useEffect } from 'react';
 import { usePathname } from "next/navigation";
-import Link from "next/link";
-import { useScrollSpy } from '../hooks/useScrollSpy';
-import CountUp from 'react-countup';
+import Link from "next/link"
+import Image from 'next/image'
 import { motion } from 'framer-motion';
+import CountUp from 'react-countup';
+
+// Iconos
 import { FaWhatsapp, FaChevronRight, FaPlay, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import { FiCheck, FiGlobe, FiMenu, FiX, FiSend, FiShield, FiCode, FiLayers, FiClock, FiCpu } from "react-icons/fi";
+import {
+  FiCheck, FiGlobe, FiMenu, FiX, FiSend, FiCode, FiLayers, FiClock, FiLock,
+  FiCloud,
+  FiCpu,
+  FiCheckCircle,
+  FiArrowRight,
+  FiShield
+} from "react-icons/fi";
+
+// Hooks
+import { useScrollSpy } from '../hooks/useScrollSpy';
 
 const Header2F = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -90,6 +102,7 @@ const Header2F = () => {
 
             <button
               onClick={() => handleScroll('contact')}
+              aria-label="Contact us"
               className={`px-6 py-2 rounded-full flex items-center gap-2 transition-colors ${isHeroVisible
                 ? 'bg-white/10 hover:bg-white/20 text-white'
                 : 'bg-green-500 hover:bg-green-600 text-black'
@@ -151,7 +164,7 @@ const item = {
 
 
 const Home = () => {
-
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   // Stats - Datos iniciales
   const [stats, setStats] = useState([
     { num: 12, text: 'Years of experience', icon: <FiClock className="text-3xl" /> },
@@ -193,6 +206,7 @@ const Home = () => {
             muted
             playsInline
             className="w-full h-full object-cover opacity-40"
+            onLoadedData={() => setIsVideoLoaded(true)}
           >
             <source src="/assets/videos/tech-wave.mp4" type="video/mp4" />
           </video>
@@ -261,40 +275,189 @@ const Home = () => {
       </section>
 
       {/* Solutions Section */}
-      <section id="solutions" className="py-20 bg-gray-900/50">
+      {/* <section id="solutions" className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
+  <div className="container mx-auto px-6">
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true }}
+      className="text-center mb-20"
+    >
+      <h2 className="text-4xl md:text-5xl font-bold mb-6">
+        Enterprise <span className="text-green-500">Technology Solutions</span>
+      </h2>
+      <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+        Mission-critical software solutions for government and regulated industries
+      </p>
+    </motion.div>
+
+    <div className="grid md:grid-cols-3 gap-8">
+      {[
+        {
+          title: "Secure Application Development",
+          desc: "End-to-end development of compliant applications with built-in security controls.",
+          svg: (
+            <svg viewBox="0 0 600 400" className="w-full h-40">
+              <path fill="#10b981" d="M300,100c50,0,100,30,100,80s-50,80-100,80s-100-30-100-80S250,100,300,100z"/>
+              <rect x="250" y="180" fill="#1e293b" width="100" height="120" rx="10"/>
+              <path fill="#10b981" d="M280,200h40v20h-40V200z M280,230h40v20h-40V230z"/>
+            </svg>
+          ),
+          items: [
+            "FISMA/FedRAMP compliant apps",
+            "Real-time vulnerability scanning",
+            "ATO acceleration packages"
+          ]
+        },
+        {
+          title: "Cloud Transformation",
+          desc: "Modernization of legacy systems with zero-trust architectures.",
+          svg: (
+            <svg viewBox="0 0 600 400" className="w-full h-40">
+              <path fill="#10b981" d="M400,150c25,0,50,25,50,50s-25,50-50,50H200c-25,0-50-25-50-50s25-50,50-50c0-50,50-100,100-100s100,50,100,100z"/>
+              <circle cx="300" cy="170" r="20" fill="#1e293b"/>
+              <circle cx="350" cy="200" r="15" fill="#1e293b"/>
+            </svg>
+          ),
+          items: [
+            "IL4/IL5 cloud migration",
+            "Cross-domain solutions",
+            "Continuous compliance monitoring"
+          ]
+        },
+        {
+          title: "AI & Edge Systems",
+          desc: "Secure AI implementations for tactical edge environments.",
+          svg: (
+            <svg viewBox="0 0 600 400" className="w-full h-40">
+              <path fill="#10b981" d="M300,100l100,50l-50,50l50,50l-100,50l-50-50l-50,50l-50-100l50-50l50,50z"/>
+              <circle cx="300" cy="200" r="30" fill="#1e293b"/>
+            </svg>
+          ),
+          items: [
+            "Classified AI training",
+            "Disconnected edge AI",
+            "Secure MLOps pipelines"
+          ]
+        }
+      ].map((solution, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+          viewport={{ once: true }}
+          className="bg-gray-900/50 hover:bg-gray-900/70 p-8 rounded-xl border border-gray-700 hover:border-green-500/50 transition-all duration-300"
+        >
+          <div className="mb-6">
+            {solution.svg}
+          </div>
+          <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
+          <p className="text-gray-400 mb-6">{solution.desc}</p>
+          <ul className="space-y-3">
+            {solution.items.map((item, i) => (
+              <li key={i} className="flex items-start gap-3 text-gray-300">
+                <svg className="flex-shrink-0 text-green-500 mt-0.5 w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+      </section> */}
+      {/* Solutions Section */}
+      <section id="solutions" className="py-20 bg-gradient-to-b from-gray-950 to-gray-900">
         <div className="container mx-auto px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center">
-            Our <span className="text-green-500">Solutions</span>
-          </h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Enterprise <span className="text-green-500">Technology Solutions</span>
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Mission-critical software solutions for government and regulated industries
+            </p>
+          </motion.div>
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                title: "Custom Software Development",
-                desc: "Tailored applications built from scratch to your specifications.",
-                items: ["Web Apps", "Mobile Apps", "Desktop Solutions"]
+                title: "Secure Application Development",
+                desc: "End-to-end development of compliant applications with built-in security controls.",
+                image: "/assets/images/two-factor-authentication.svg",
+                items: [
+                  "FISMA/FedRAMP compliant apps",
+                  "Real-time vulnerability scanning",
+                  "ATO acceleration packages"
+                ]
               },
               {
-                title: "Digital Transformation",
-                desc: "Modernize legacy systems with cloud-native architectures.",
-                items: ["Cloud Migration", "API Integration", "Data Pipelines"]
+                title: "Cloud Transformation",
+                desc: "Modernization of legacy systems with zero-trust architectures.",
+                image: "/assets/images/cloud-hosting.svg",
+                items: [
+                  "IL4/IL5 cloud migration",
+                  "Cross-domain solutions",
+                  "Continuous compliance monitoring"
+                ]
               },
               {
-                title: "AI & Automation",
-                desc: "Intelligent systems that learn and adapt.",
-                items: ["Machine Learning", "Computer Vision", "Process Automation"]
+                title: "AI & Edge Systems",
+                desc: "Secure AI implementations for tactical edge environments.",
+                image: "/assets/images/visionary-technology.svg",
+                items: [
+                  "Classified AI training",
+                  "Disconnected edge AI",
+                  "Secure MLOps pipelines"
+                ]
               }
             ].map((solution, index) => (
-              <div key={index} className="bg-gray-800/50 hover:bg-gray-800/80 p-8 rounded-xl border border-gray-700 hover:border-green-500/30 transition-all duration-300">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-gray-900/50 hover:bg-gray-900/70 p-8 rounded-xl border border-gray-700 hover:border-green-500/50 transition-all duration-300"
+              >
+                <div className="mb-6 h-40 flex items-center justify-center">
+                  <img
+                    src={solution.image}
+                    alt={solution.title}
+                    className="h-full object-contain"
+                    onError={(e) => {
+                      // Fallback a SVG genérico si la imagen no carga
+                      e.target.src = `data:image/svg+xml;base64,${btoa(`
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" fill="#10b981">
+                    <rect width="600" height="400" fill="none"/>
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#10b981" font-family="Arial" font-size="20">${solution.title}</text>
+                  </svg>
+                `)}`;
+                    }}
+                  />
+                </div>
                 <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
                 <p className="text-gray-400 mb-6">{solution.desc}</p>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {solution.items.map((item, i) => (
-                    <li key={i} className="flex items-center gap-2 text-gray-300">
-                      <FiCheck className="text-green-500" /> {item}
+                    <li key={i} className="flex items-start gap-3 text-gray-300">
+                      <svg className="flex-shrink-0 text-green-500 mt-0.5 w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      <span>{item}</span>
                     </li>
                   ))}
                 </ul>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
