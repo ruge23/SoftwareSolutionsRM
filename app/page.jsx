@@ -1,10 +1,12 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { useScrollSpy } from '../hooks/useScrollSpy';
+import CountUp from 'react-countup';
+import { motion } from 'framer-motion';
 import { FaWhatsapp, FaChevronRight, FaPlay, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
-import { FiCheck, FiGlobe, FiMenu, FiX, FiSend } from "react-icons/fi";
+import { FiCheck, FiGlobe, FiMenu, FiX, FiSend, FiShield, FiCode, FiLayers, FiClock, FiCpu } from "react-icons/fi";
 
 const Header2F = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -18,10 +20,22 @@ const Header2F = () => {
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      // Get the current scroll position
+      const currentPosition = window.scrollY;
+      const targetPosition = element.offsetTop;
+
+      // Only animate if the distance is significant
+      if (Math.abs(currentPosition - targetPosition) > 100) {
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      } else {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
     }
     setMobileMenuOpen(false);
   };
@@ -120,7 +134,51 @@ const Header2F = () => {
   );
 };
 
+// Stats - Animaciones
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
+
 const Home = () => {
+
+  // Stats - Datos iniciales
+  const [stats, setStats] = useState([
+    { num: 12, text: 'Years of experience', icon: <FiClock className="text-3xl" /> },
+    { num: 89, text: 'Projects completed', icon: <FiLayers className="text-3xl" /> },
+    { num: 15, text: 'Technologies mastered', icon: <FiCpu className="text-3xl" /> },
+    { num: 4003, text: 'Code commits', icon: <FiCode className="text-3xl" /> }
+  ]);
+
+  // Stats - Simular actualización en tiempo real de commits
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setStats(prevStats => {
+        const updatedStats = [...prevStats];
+        const commitsIndex = updatedStats.findIndex(stat => stat.text === 'Code commits');
+        if (commitsIndex !== -1) {
+          updatedStats[commitsIndex] = {
+            ...updatedStats[commitsIndex],
+            num: updatedStats[commitsIndex].num + Math.floor(Math.random() * 3)
+          };
+        }
+        return updatedStats;
+      });
+    }, 60000); // Actualiza cada minuto
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="bg-gray-950 text-white">
       <Header2F />
@@ -243,7 +301,7 @@ const Home = () => {
       </section>
 
       {/* Approach Section */}
-      <section id="approach" className="py-20">
+      {/* <section id="approach" className="py-20">
         <div className="container mx-auto px-6">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Our <span className="text-green-500">Approach</span></h2>
           <p className="text-xl text-gray-400 mb-16 max-w-3xl">
@@ -268,8 +326,196 @@ const Home = () => {
             ))}
           </div>
         </div>
+      </section> */}
+      <section id="solutions" className="py-20 bg-gray-950">
+        <div className="container mx-auto px-6">
+          <div className="text-center max-w-4xl mx-auto mb-20">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              Secure Development <span className="text-green-500">Framework</span>
+            </h2>
+            <p className="text-xl text-gray-400">
+              Compliance-built solutions for mission-critical software deployment
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-3 gap-10">
+            {/* Card 1 - DevSuite */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden hover:border-green-500/50 transition-all duration-300 group"
+            >
+              <div className="h-60 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center p-6">
+                <img
+                  src="/assets/images/developer-activity.svg"
+                  alt="Secure development toolkit"
+                  className="h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-green-500/10 p-2 rounded-lg">
+                    <FiCode className="text-green-500 text-xl" />
+                  </div>
+                  <h3 className="text-2xl font-bold">RM DevSuite</h3>
+                </div>
+                <p className="text-gray-400 mb-6">
+                  Our integrated toolkit embeds security scanning and compliance checks directly into CI/CD pipelines, ensuring government-ready code from the first commit.
+                </p>
+                <button className="text-green-500 hover:text-green-400 font-medium flex items-center gap-2 transition group">
+                  Explore DevSuite
+                  <FaChevronRight className="group-hover:translate-x-1 transition-transform" size={14} />
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Card 2 - Sentinel */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden hover:border-green-500/50 transition-all duration-300 group"
+            >
+              <div className="h-60 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center p-6">
+                <img
+                  src="/assets/images/secure-server.svg"
+                  alt="Accredited deployment platform"
+                  className="h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-green-500/10 p-2 rounded-lg">
+                    <FiShield className="text-green-500 text-xl" />
+                  </div>
+                  <h3 className="text-2xl font-bold">RM Sentinel</h3>
+                </div>
+                <p className="text-gray-400 mb-6">
+                  Fully accredited platform for IL5 to Top Secret deployments. Automates 80% of compliance documentation while providing real-time audit trails.
+                </p>
+                <button className="text-green-500 hover:text-green-400 font-medium flex items-center gap-2 transition group">
+                  Discover Sentinel
+                  <FaChevronRight className="group-hover:translate-x-1 transition-transform" size={14} />
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Card 3 - EdgeCore */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              viewport={{ once: true }}
+              className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden hover:border-green-500/50 transition-all duration-300 group"
+            >
+              <div className="h-60 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center p-6">
+                <img
+                  src="/assets/images/connected-world.svg"
+                  alt="Edge deployment solution"
+                  className="h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="p-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-green-500/10 p-2 rounded-lg">
+                    <FiGlobe className="text-green-500 text-xl" />
+                  </div>
+                  <h3 className="text-2xl font-bold">RM EdgeCore</h3>
+                </div>
+                <p className="text-gray-400 mb-6">
+                  Battle-tested deployment framework for disconnected environments. Maintains full security protocols while operating beyond cloud infrastructure.
+                </p>
+                <button className="text-green-500 hover:text-green-400 font-medium flex items-center gap-2 transition group">
+                  Learn About EdgeCore
+                  <FaChevronRight className="group-hover:translate-x-1 transition-transform" size={14} />
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
+      {/* Stats Section */}
+      <section className="py-20 bg-gray-900/50 relative overflow-hidden">
+        {/* Fondo decorativo */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-green-500/10 to-transparent"></div>
+          <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gradient-to-l from-green-500/10 to-transparent"></div>
+        </div>
+
+        <div className="container mx-auto px-6">
+          {/* Encabezado */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              Our <span className="text-green-500">Impact</span> in Numbers
+            </h2>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Quantifying our journey of innovation and technological excellence
+            </p>
+          </motion.div>
+
+          {/* Estadísticas */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          >
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                variants={item}
+                className="bg-gray-800/50 hover:bg-gray-800/80 p-8 rounded-xl border border-gray-700 hover:border-green-500/30 transition-all duration-300 group"
+              >
+                <div className="flex items-center gap-4 mb-4 text-green-500">
+                  {stat.icon}
+                  <CountUp
+                    end={stat.num}
+                    duration={3}
+                    delay={index * 0.2}
+                    separator=","
+                    className="text-4xl font-bold"
+                  >
+                    {({ countUpRef }) => (
+                      <span ref={countUpRef} className="group-hover:text-green-400 transition-colors" />
+                    )}
+                  </CountUp>
+                  {stat.text === 'Code commits' && (
+                    <span className="text-xs bg-green-500/20 text-green-400 px-2 py-1 rounded-full animate-pulse">
+                      Live
+                    </span>
+                  )}
+                </div>
+                <p className="text-gray-400 text-lg">{stat.text}</p>
+                {stat.text === 'Code commits' && (
+                  <p className="text-xs text-gray-500 mt-2">Updated in real-time</p>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Nota al pie */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 1, duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-center mt-12 text-gray-500 text-sm"
+          >
+            * Metrics updated as of {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+          </motion.div>
+        </div>
+      </section>
       {/* Contact Section */}
       <section id="contact" className="py-20 bg-gray-900">
         <div className="container mx-auto px-6">
