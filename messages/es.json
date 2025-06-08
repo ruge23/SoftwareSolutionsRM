@@ -1,0 +1,120 @@
+{
+  "Home": {
+    "hero": {
+      "tagline": "Innovación Tecnológica",
+      "title1": "Soluciones de Software",
+      "title2": "para",
+      "title3": "Transformación Digital",
+      "description": "Diseñamos y desarrollamos soluciones de software de vanguardia que impulsan el crecimiento empresarial, aprovechando las últimas tecnologías con ingeniería de precisión.",
+      "cta1": "Inicia Tu Proyecto",
+      "cta2": "Ver Video"
+    },
+    "solutions": {
+      "title": "Soluciones Tecnológicas Empresariales",
+      "subtitle": "Soluciones de software críticas para gobierno e industrias reguladas",
+      "items": [
+        {
+          "title": "Desarrollo Seguro de Aplicaciones",
+          "description": "Desarrollo integral de aplicaciones compatibles con controles de seguridad incorporados.",
+          "features": [
+            "Aplicaciones compatibles con FISMA/FedRAMP",
+            "Escaneo de vulnerabilidades en tiempo real",
+            "Paquetes de aceleración ATO"
+          ]
+        },
+        {
+          "title": "Transformación en la Nube",
+          "description": "Modernización de sistemas heredados con arquitecturas de confianza cero.",
+          "features": [
+            "Migración a la nube IL4/IL5",
+            "Soluciones de múltiples dominios",
+            "Monitoreo continuo de cumplimiento"
+          ]
+        },
+        {
+          "title": "Sistemas de IA y Edge",
+          "description": "Implementaciones seguras de IA para entornos tácticos edge.",
+          "features": [
+            "Entrenamiento de IA clasificado",
+            "IA edge desconectada",
+            "Pipelines seguros de MLOps"
+          ]
+        }
+      ]
+    },
+    "stats": {
+      "title": "Nuestro Impacto en Números",
+      "subtitle": "Cuantificando nuestro viaje de innovación y excelencia tecnológica",
+      "items": [
+        {
+          "value": 12,
+          "label": "Años de experiencia"
+        },
+        {
+          "value": 89,
+          "label": "Proyectos completados"
+        },
+        {
+          "value": 15,
+          "label": "Tecnologías dominadas"
+        },
+        {
+          "value": 4003,
+          "label": "Commits de código"
+        }
+      ],
+      "note": "Métricas actualizadas al"
+    },
+    "contact": {
+      "title": "Potencia a tu equipo con nuestras soluciones de software",
+      "subtitle": "Acelera el desarrollo y entrega ágil de software con RM Tech Suite",
+      "description": "Descubre cómo nuestras soluciones tecnológicas pueden ayudar a impulsar la innovación mientras protegen la seguridad",
+      "info": {
+        "global": {
+          "title": "Alcance Global",
+          "description": "Atendiendo clientes en 12 países"
+        },
+        "phone": {
+          "title": "Soporte Directo",
+          "numbers": [
+            "+1 (786) 968-2945 (Estados Unidos)",
+            "+54 381 315-8053 (Argentina)"
+          ]
+        },
+        "email": {
+          "title": "Escríbenos",
+          "address": "softwaresolutionsrm@gmail.com"
+        }
+      },
+      "form": {
+        "title": "Contáctate con RM Tech",
+        "fields": {
+          "firstName": "Nombre *",
+          "lastName": "Apellido *",
+          "email": "Correo Electrónico *",
+          "phone": "Teléfono",
+          "company": "Empresa",
+          "orgType": "Tipo de Organización",
+          "orgTypes": {
+            "enterprise": "Empresa",
+            "smb": "Pequeña/Mediana Empresa",
+            "startup": "Startup",
+            "government": "Gobierno",
+            "nonprofit": "Sin fines de lucro",
+            "education": "Educación"
+          },
+          "message": "Tu mensaje...",
+          "newsletter": "Recibir noticias, eventos y ofertas de RM Tech",
+          "submit": "Enviar"
+        }
+      }
+    },
+    "navigation": {
+      "home": "Inicio",
+      "solutions": "Soluciones",
+      "approach": "Enfoque",
+      "contact": "Contacto",
+      "contactButton": "Contáctanos"
+    }
+  }
+}

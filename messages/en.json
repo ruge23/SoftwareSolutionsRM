@@ -1,0 +1,120 @@
+{
+  "Home": {
+    "hero": {
+      "tagline": "Technological Innovation",
+      "title1": "Software Solutions",
+      "title2": "for",
+      "title3": "Digital Transformation",
+      "description": "We design and develop cutting-edge software solutions that drive business growth, leveraging the latest technologies with precision engineering.",
+      "cta1": "Start Your Project",
+      "cta2": "Watch Showreel"
+    },
+    "solutions": {
+      "title": "Enterprise Technology Solutions",
+      "subtitle": "Mission-critical software solutions for government and regulated industries",
+      "items": [
+        {
+          "title": "Secure Application Development",
+          "description": "End-to-end development of compliant applications with built-in security controls.",
+          "features": [
+            "FISMA/FedRAMP compliant apps",
+            "Real-time vulnerability scanning",
+            "ATO acceleration packages"
+          ]
+        },
+        {
+          "title": "Cloud Transformation",
+          "description": "Modernization of legacy systems with zero-trust architectures.",
+          "features": [
+            "IL4/IL5 cloud migration",
+            "Cross-domain solutions",
+            "Continuous compliance monitoring"
+          ]
+        },
+        {
+          "title": "AI & Edge Systems",
+          "description": "Secure AI implementations for tactical edge environments.",
+          "features": [
+            "Classified AI training",
+            "Disconnected edge AI",
+            "Secure MLOps pipelines"
+          ]
+        }
+      ]
+    },
+    "stats": {
+      "title": "Our Impact in Numbers",
+      "subtitle": "Quantifying our journey of innovation and technological excellence",
+      "items": [
+        {
+          "value": 12,
+          "label": "Years of experience"
+        },
+        {
+          "value": 89,
+          "label": "Projects completed"
+        },
+        {
+          "value": 15,
+          "label": "Technologies mastered"
+        },
+        {
+          "value": 4003,
+          "label": "Code commits"
+        }
+      ],
+      "note": "Metrics updated as of"
+    },
+    "contact": {
+      "title": "Empower your team with our software solutions",
+      "subtitle": "Accelerate agile software development and delivery with RM Tech Suite",
+      "description": "Discover how our technology solutions can help drive innovation while protecting security",
+      "info": {
+        "global": {
+          "title": "Global Reach",
+          "description": "Serving clients across 12 countries"
+        },
+        "phone": {
+          "title": "Direct Support",
+          "numbers": [
+            "+1 (786) 968-2945 (United States)",
+            "+54 381 315-8053 (Argentina)"
+          ]
+        },
+        "email": {
+          "title": "Email Us",
+          "address": "softwaresolutionsrm@gmail.com"
+        }
+      },
+      "form": {
+        "title": "Get in touch with RM Tech",
+        "fields": {
+          "firstName": "First Name *",
+          "lastName": "Last Name *",
+          "email": "Email Address *",
+          "phone": "Phone Number",
+          "company": "Company Name",
+          "orgType": "Organization Type",
+          "orgTypes": {
+            "enterprise": "Enterprise",
+            "smb": "Small/Medium Business",
+            "startup": "Startup",
+            "government": "Government",
+            "nonprofit": "Non-profit",
+            "education": "Education"
+          },
+          "message": "Your message...",
+          "newsletter": "Send me RM Tech news, events & offers",
+          "submit": "Submit"
+        }
+      }
+    },
+    "navigation": {
+      "home": "Home",
+      "solutions": "Solutions",
+      "approach": "Approach",
+      "contact": "Contact",
+      "contactButton": "Contact Us"
+    }
+  }
+}
