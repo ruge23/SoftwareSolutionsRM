@@ -1,5 +1,9 @@
 import { JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { notFound } from 'next/navigation';
+import { routing } from "@/i18n/routing";
 
 //components
 import Header from "@/components/Header";
@@ -18,13 +22,23 @@ export const metadata = {
   keywords: "software a medida, desarrollo web, aplicaciones móviles, digitalización empresarial",
 };
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ 
+  children, 
+  params 
+}) {
+  const { locale } = await params;
+  if(!routing.locales.includes(locale)) {
+    notFound();
+  }
+  const messages = await getMessages();
   return (
     <html lang="en">
       <body className={jetbrainsMono.variable}>
-        {/* <Header /> */}
-        <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        <NextIntlClientProvider messages={messages}>
+          {/* <Header /> */}
+          <StairTransition />
+          <PageTransition>{children}</PageTransition>
+        </NextIntlClientProvider>
       </body>
     </html>
   );
