@@ -306,6 +306,21 @@ const Home = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const t = useTranslations('Home');
 
+  // Seccion Contant
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    companyName: '',
+    organizationType: '',
+    message: '',
+    subscribe: true,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
+
   // Stats - Datos iniciales
   const [stats, setStats] = useState(() => {
     const statItems = t.raw('stats.items');
@@ -318,6 +333,54 @@ const Home = () => {
             <FiCode className="text-3xl" />
     }));
   });
+
+  // Contact handler
+  const handleChange = (e) => {
+  const { name, value, type, checked } = e.target;
+  
+  setFormData(prev => ({
+    ...prev,
+    [name]: type === 'checkbox' ? checked : value
+  }));
+};
+
+  // Contant submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          companyName: '',
+          organizationType: '',
+          message: '',
+          subscribe: true,
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      setSubmitStatus('error');
+      console.error('Error submitting form:', error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   // Stats - Simular actualización en tiempo real de commits
   useEffect(() => {
@@ -658,7 +721,7 @@ const Home = () => {
                 {t('contact.form.title').split(' ').slice(0, 4).join(' ')} <span className="text-green-500">{t('contact.form.title').split(' ').slice(4).join(' ')}</span>
               </h3>
 
-              <form className="space-y-6">
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <input
@@ -667,6 +730,8 @@ const Home = () => {
                       placeholder={t('contact.form.fields.firstName')}
                       className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
                       required
+                      value={formData.firstName}
+                      onChange={handleChange}
                     />
                   </div>
 
@@ -677,6 +742,8 @@ const Home = () => {
                       placeholder={t('contact.form.fields.lastName')}
                       className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
                       required
+                      value={formData.lastName}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -688,6 +755,8 @@ const Home = () => {
                     placeholder={t('contact.form.fields.email')}
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
                     required
+                    value={formData.email}
+                    onChange={handleChange}
                   />
                 </div>
 
@@ -698,6 +767,8 @@ const Home = () => {
                       type="tel"
                       placeholder={t('contact.form.fields.phone')}
                       className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
+                      value={formData.email}
+                      onChange={handleChange}
                     />
                   </div>
 
@@ -707,6 +778,8 @@ const Home = () => {
                       type="text"
                       placeholder={t('contact.form.fields.company')}
                       className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
+                      value={formData.companyName}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -715,6 +788,8 @@ const Home = () => {
                   <select
                     name="organizationType"
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
+                    value={formData.organizationType}
+                    onChange={handleChange}
                   >
                     <option value="">{t('contact.form.fields.orgType')}</option>
                     {Object.entries(t.raw('contact.form.fields.orgTypes')).map(([value, label]) => (
@@ -729,6 +804,8 @@ const Home = () => {
                     placeholder={t('contact.form.fields.message')}
                     rows={5}
                     className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-green-500 focus:ring-green-500"
+                    value={formData.message}
+                    onChange={handleChange}
                   ></textarea>
                 </div>
 
@@ -739,18 +816,37 @@ const Home = () => {
                     name="subscribe"
                     defaultChecked
                     className="h-4 w-4 text-green-500 rounded bg-gray-700 border-gray-600 focus:ring-green-500"
+                    checked={formData.subscribe}
+                    onChange={handleChange}
                   />
                   <label htmlFor="subscribe" className="text-sm text-gray-400">
                     {t('contact.form.fields.newsletter')}
                   </label>
                 </div>
-
+                {/* Mensaje de estado */}
+                {submitStatus === 'success' && (
+                  <div className="p-4 bg-green-500/10 text-green-400 rounded-lg">
+                    {t('contact.form.successMessage')}
+                  </div>
+                )}
+                {submitStatus === 'error' && (
+                  <div className="p-4 bg-red-500/10 text-red-400 rounded-lg">
+                    {t('contact.form.errorMessage')}
+                  </div>
+                )}
                 <button
                   type="submit"
+                  disabled={isSubmitting}
                   className="bg-green-500 hover:bg-green-600 text-black font-medium px-6 py-4 rounded-full w-full transition flex items-center justify-center gap-2"
                 >
-                  <span>{t('contact.form.fields.submit')}</span>
-                  <FiSend />
+                  {isSubmitting ? (
+                    <span>{t('contact.form.submitting')}</span>
+                  ) : (
+                    <>
+                      <span>{t('contact.form.fields.submit')}</span>
+                      <FiSend />
+                    </>
+                  )}
                 </button>
               </form>
             </div>
