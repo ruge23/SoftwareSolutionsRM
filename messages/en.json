@@ -127,7 +127,10 @@
           "message": "Your message...",
           "newsletter": "Send me RM Tech news, events & offers",
           "submit": "Submit"
-        }
+        },
+        "errorMessage":"Fialed submit email. Try again!",
+        "submitting": "Sending",
+        "successMessage": "Mail sended"
       }
     },
     "navigation": {

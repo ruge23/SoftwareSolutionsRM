@@ -126,7 +126,10 @@
           },
           "message": "Tu mensaje...",
           "newsletter": "Recibir noticias, eventos y ofertas de RM Tech",
-          "submit": "Enviar"
+          "submit": "Enviar",
+          "errorMessage":"Fallo el envio. Vuelve a intentarlo!",
+          "submitting": "Enviando",
+          "successMessage": "Mail enviado con exito!"
         }
       }
     },

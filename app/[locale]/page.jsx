@@ -305,6 +305,7 @@ const item = {
 const Home = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const t = useTranslations('Home');
+  const locale = useLocale();
 
   // Seccion Contant
   const [formData, setFormData] = useState({
@@ -349,39 +350,72 @@ const Home = () => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
-
+  
     try {
-      const response = await fetch('/api/contact', {
+      // Prepara los datos del formulario con el formato mejorado
+      const emailData = {
+        from: `"Software Solutions" <${process.env.EMAIL_USER}>`,
+        to: 'softwaresolutions@gmail.com',
+        subject: `Nuevo mensaje de ${formData.firstName} ${formData.lastName} - ${new Date().toLocaleString()}`,
+        text: `Has recibido un nuevo mensaje de contacto:\n\nNombre: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nTeléfono: ${formData.phone || 'No proporcionado'}\nMensaje: ${formData.message}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #10B981;">Nuevo mensaje de contacto</h2>
+            <p><strong>Nombre:</strong> ${formData.firstName} ${formData.lastName}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Teléfono:</strong> ${formData.phone || 'No proporcionado'}</p>
+            <p><strong>Empresa:</strong> ${formData.companyName || 'No proporcionada'}</p>
+            <p><strong>Tipo de organización:</strong> ${formData.organizationType || 'No especificado'}</p>
+            <h3>Mensaje:</h3>
+            <p>${formData.message}</p>
+            <p style="color: #666; font-size: 12px; margin-top: 20px;">
+              Mensaje enviado el ${new Date().toLocaleString()} desde el formulario de contacto
+            </p>
+          </div>
+        `,
+        headers: {
+          'X-Priority': '1',
+          'X-Mailer': 'Nodemailer',
+          'X-Google-Original-From': process.env.EMAIL_USER
+        }
+      };
+    
+      const response = await fetch(`/${locale}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(emailData),
       });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          companyName: '',
-          organizationType: '',
-          message: '',
-          subscribe: true,
-        });
-      } else {
-        setSubmitStatus('error');
+    
+      const responseData = await response.json();
+    
+      if (!response.ok) {
+        throw new Error(responseData.error || 'Error al enviar el mensaje');
       }
+    
+      setSubmitStatus('success');
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        companyName: '',
+        organizationType: '',
+        message: '',
+        subscribe: true,
+      });
+    
     } catch (error) {
+      console.error('Error al enviar el formulario:', error);
       setSubmitStatus('error');
-      console.error('Error submitting form:', error);
+      // Opcional: Mostrar mensaje de error específico al usuario
+      // setErrorMessage(error.message);
     } finally {
       setIsSubmitting(false);
     }
   };
-
+  
   // Stats - Simular actualización en tiempo real de commits
   useEffect(() => {
     const interval = setInterval(() => {
@@ -814,7 +848,6 @@ const Home = () => {
                     type="checkbox"
                     id="subscribe"
                     name="subscribe"
-                    defaultChecked
                     className="h-4 w-4 text-green-500 rounded bg-gray-700 border-gray-600 focus:ring-green-500"
                     checked={formData.subscribe}
                     onChange={handleChange}
